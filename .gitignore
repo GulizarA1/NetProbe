@@ -1,0 +1,13 @@
+# Python önbellek dosyaları
+__pycache__/
+*.pyc
+
+# Geçici test verileri ve kopyalar
+*.bin
+*.txt
+kopya_*
+transfer_stats.csv
+
+# IDE ve Editör ayarları
+.vscode/
+.idea/

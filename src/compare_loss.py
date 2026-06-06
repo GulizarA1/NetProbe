@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def analyze_loss_rates():
+    files = {
+        "%0 Kayıp": "stats_loss_0.csv",
+        "%10 Kayıp": "stats_loss_10.csv",
+        "%20 Kayıp": "stats_loss_20.csv"
+    }
+
+    results = {}
+
+    for label, file_name in files.items():
+        try:
+            df = pd.read_csv(file_name)
+            start_time = df['Timestamp'].min()
+            end_time = df['Timestamp'].max()
+            duration = end_time - start_time
+            
+            # Yeniden gönderim sayısını bul
+            retransmissions = len(df[df['Event'] == 'RETRANSMISSION'])
+            
+            results[label] = {
+                "Süre": duration,
+                "Yeniden Gönderim": retransmissions
+            }
+        except FileNotFoundError:
+            print(f"Hata: {file_name} bulunamadı! Lütfen adını doğru değiştirdiğinizden emin olun.")
+            return
+
+    labels = list(results.keys())
+    durations = [results[l]["Süre"] for l in labels]
+    retrans_counts = [results[l]["Yeniden Gönderim"] for l in labels]
+
+    plt.figure(figsize=(12, 5))
+
+    # Sol Grafik: Tamamlanma Süresi
+    plt.subplot(1, 2, 1)
+    bars1 = plt.bar(labels, durations, color=['#4CAF50', '#FFC107', '#F44336'])
+    plt.title('Paket Kaybının Tamamlanma Süresine Etkisi', fontsize=12)
+    plt.ylabel('Toplam Süre (Saniye)')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    
+    for bar in bars1:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, yval, f'{yval:.2f}s', ha='center', va='bottom', fontweight='bold')
+
+    # Sağ Grafik: Yeniden Gönderim Sayısı
+    plt.subplot(1, 2, 2)
+    bars2 = plt.bar(labels, retrans_counts, color=['#9C27B0', '#673AB7', '#3F51B5'])
+    plt.title('Paket Kaybının Yeniden Gönderim (Retransmission) Sayısına Etkisi', fontsize=12)
+    plt.ylabel('Yeniden Gönderim Sayısı')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    
+    for bar in bars2:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, yval, int(yval), ha='center', va='bottom', fontweight='bold')
+
+    plt.tight_layout()
+    plt.savefig('deney2_kayip_orani.png', dpi=300)
+    print("\nHarika! 'deney2_kayip_orani.png' başarıyla oluşturuldu.")
+    plt.show()
+
+if __name__ == "__main__":
+    analyze_loss_rates()
