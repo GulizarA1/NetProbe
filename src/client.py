@@ -9,8 +9,8 @@ from packet import create_packet, parse_packet, HEADER_SIZE
 
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 5005
-CHUNK_SIZE = 2048
-TIMEOUT_VALUE = 1.0
+CHUNK_SIZE = 1024
+TIMEOUT_VALUE =1.0
 MAX_RETRIES = 5      
 
 log_data = []

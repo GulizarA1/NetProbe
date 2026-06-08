@@ -7,7 +7,7 @@ from packet import parse_packet, create_packet, HEADER_SIZE
 SERVER_IP = "127.0.0.1"
 SERVER_PORT = 5005
 BUFFER_SIZE = 4096
-LOSS_RATE = 0.0  # GERÇEK TEST İÇİN KAYBI ŞİMDİLİK %0 YAPTIK (0.0)
+LOSS_RATE = 0.0 # GERÇEK TEST İÇİN KAYBI ŞİMDİLİK %0 YAPTIK (0.0)
 
 def start_server():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
