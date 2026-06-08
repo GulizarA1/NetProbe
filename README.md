@@ -56,5 +56,10 @@ pip install pandas matplotlib
 
 ---
 
+## 🎥 Proje Demo Videosu
+Projeyi canlı olarak çalıştırdığımız, ideal ve kayıplı ağ senaryolarını test ettiğimiz sunum videomuzu aşağıdan izleyebilirsiniz:
+
+[▶️ NetProbe Uygulamalı Demo Videosunu İzlemek İçin Tıklayın](https://www.youtube.com/watch?v=lVtV2eUXqbs)
+
 ## 📜 License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
